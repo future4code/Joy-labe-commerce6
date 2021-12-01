@@ -4,6 +4,12 @@ import styled from 'styled-components';
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  img {
+    height: 100%;
+    width: 100%;
+
+  }
 `;
 
 const SateliteInfo = styled.div`
@@ -28,11 +34,14 @@ const Adicionar = styled.button`
 
 export class SateliteCard extends React.Component {
   render() {
+    //váriavel para guardar dados da props
+    const satelite = this.props.satelite
+
     return <CardContainer>
-      <img src={'https://picsum.photos/200/200?a=1'}/>
+      <img src={satelite.foto} alt="Imagem produto"/>
       <SateliteInfo>
-        <p>Produto</p>
-        <p>R$00,00</p>
+        <p>{satelite.nome}</p>
+        <p>R${satelite.preco},00</p>
         <Adicionar>
           Adicionar ao carrinho
         </Adicionar>

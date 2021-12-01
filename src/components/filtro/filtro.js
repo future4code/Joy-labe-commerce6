@@ -29,24 +29,24 @@ export class Filtro extends React.Component {
           Valor mínimo:
           <input
             type="number"
-            // value={}
-            // onChange={}
+            value={this.props.valorMinimo}
+            onChange={this.props.onChangeValorMinimo}
           />
         </ContainerInput>
         <ContainerInput>
           Valor máximo:
           <input
             type="number"
-            // value={}
-            // onChange={}
+            value={this.props.valorMaximo}
+            onChange={this.props.onChangeValorMaximo}
           />
         </ContainerInput>
         <ContainerInput>
           Busca por nome:
           <input
             type="text"
-            // value={}
-            // onChange={}
+            value={this.props.buscaNome}
+            onChange={this.props.onChangeBuscaNome}
           />
         </ContainerInput>
     </ContainerFiltro>
