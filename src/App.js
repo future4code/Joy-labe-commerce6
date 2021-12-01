@@ -42,43 +42,65 @@ const satelites = [
   {
     id: 1,
     nome: 'Satélite Espião',
-    preco: 66.66666,
-    foto: {sat1}
+    preco: 666,
+    foto: sat1
   },
   {
     id: 2,
     nome: 'Satélite Bonitinho',
-    preco: 8.888,
-    foto: {sat2}
+    preco: 888,
+    foto: sat2
   },
   {
     id: 3,
-    nome: 'Satelezinho',
-    preco: 44.444444444,
-    foto: {sat3}
+    nome: 'Satélite Flopado',
+    preco: 444,
+    foto: sat3
   },
   {
     id: 4,
-    nome: 'Sateletezão',
-    preco: 8666.66666888,
-    foto: {sat4}
+    nome: 'Satélite Quadrado',
+    preco: 866,
+    foto: sat4
   },
   {
     id: 5,
     nome: 'Satélite Esquisito',
-    preco: 555.55555555555,
-    foto: {sat5}
+    preco: 555,
+    foto: sat5
   },
   {
     id: 6,
     nome: 'Satélite Feio',
-    preco: 87.87878787878,
-    foto: {sat6}
+    preco: 87,
+    foto: sat6
   }
 ]
 
 
 class App extends React.Component {
+  state = {
+    valorMinimo: 0,
+    valorMaximo: 1000,
+    buscaNome: "Satélite",
+    produtosCarrinho: []
+  }
+
+  //Fazendo os inputs de filtro funcionar
+  onChangeValorMinimo = (event) => {
+    this.setState({valorMinimo: event.target.value})
+  }
+
+  onChangeValorMaximo = (event) => {
+    this.setState({valorMaximo: event.target.value})
+  }
+
+  onChangeBuscaNome = (event) => {
+    this.setState({buscaNome: event.target.value})
+  }
+
+  //funções do carrinho
+
   render() {
     return (
       <div className="App">
@@ -89,11 +111,23 @@ class App extends React.Component {
 
         <Main>
 
-          <Filtro></Filtro>
+          <Filtro
+          valorMinimo={this.state.valorMinimo}
+          valorMaximo={this.state.valorMaximo}
+          buscaNome={this.state.buscaNome}
+          onChangeValorMinimo={this.onChangeValorMinimo}
+          onChangeValorMaximo={this.onChangeValorMaximo}
+          onChangeBuscaNome={this.onChangeBuscaNome}
+          />
 
-          <Satelites/>
+          <Satelites
+          satelites={satelites}
+          valorMinimo={this.state.valorMinimo}
+          valorMaximo={this.state.valorMaximo}
+          buscaNome={this.state.buscaNome}
+          />
 
-          <Carrinho></Carrinho>
+          <Carrinho/>
 
         </Main>
   
