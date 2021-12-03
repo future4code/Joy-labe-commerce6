@@ -5,9 +5,6 @@ import spaceship from './img/spaceship.png'
 import sat1 from './img/sat1.png'
 import sat2 from './img/sat2.png'
 import sat3 from './img/sat3.png'
-import sat4 from './img/sat4.png'
-import sat5 from './img/sat5.png'
-import sat6 from './img/sat6.png'
 import { Filtro } from './components/filtro/filtro';
 import { Carrinho } from './components/carrinho/carrinho';
 import { Satelites } from './components/satelites/satelites';
@@ -27,8 +24,8 @@ flex-direction: column;
 
 img {
   margin-top: 20px;
-  height: 25vh;
-  width: 25vh;
+  height: 30vh;
+  width: 30vh;
 }
 h1 {
   color: white;
@@ -56,24 +53,6 @@ const satelites = [
     nome: 'Satélite Flopado',
     preco: 444,
     foto: sat3
-  },
-  {
-    id: 4,
-    nome: 'Satélite Quadrado',
-    preco: 866,
-    foto: sat4
-  },
-  {
-    id: 5,
-    nome: 'Satélite Esquisito',
-    preco: 555,
-    foto: sat5
-  },
-  {
-    id: 6,
-    nome: 'Satélite Feio',
-    preco: 87,
-    foto: sat6
   }
 ]
 
@@ -83,7 +62,7 @@ class App extends React.Component {
     valorMinimo: 0,
     valorMaximo: 1000,
     buscaNome: "Satélite",
-    produtosCarrinho: []
+    satelitesCarrinho: []
   }
 
   //Fazendo os inputs de filtro funcionar
@@ -99,35 +78,59 @@ class App extends React.Component {
     this.setState({buscaNome: event.target.value})
   }
 
-  //funções do carrinho
+  //função carrinho adicionar itens
+
+  adicionarAoCarrinho = (sateliteID) => {
+    //usar a variável find para pegar os itens do array satelites
+      const adicionarSatelite = satelites.find((satelite) => sateliteID === satelite.id)
+
+    //criar uma variável para armazenar os itens do array satelites no array do carrinho
+      const satelistesAdicionados = [...this.state.satelitesCarrinho, {...adicionarSatelite, quantidade: 1}]
+
+    //povoar o array do carrinho com a variável anterior
+      this.setState({satelitesCarrinho: satelistesAdicionados})
+  }
+
+  //função para remover
+  removerDoCarrinho = () => {
+    //filtrar o array para retornar produtos com o preço = 0
+    const produtoRemovido = this.state.satelitesCarrinho.filter((satelite) => satelite.preco === 0)
+
+    //povoar o array de carrinho com esse filtro que será vazio já que nnehum satelite tem o preço 0
+    this.setState({satelitesCarrinho: produtoRemovido})
+  }
 
   render() {
     return (
       <div className="App">
         <Header>
           <img src={spaceship} alt="nave espacial" />
-          <h1>AstroShop</h1>
+          <h1>AstroShop</h1> 
         </Header>
 
         <Main>
 
           <Filtro
-          valorMinimo={this.state.valorMinimo}
-          valorMaximo={this.state.valorMaximo}
-          buscaNome={this.state.buscaNome}
-          onChangeValorMinimo={this.onChangeValorMinimo}
-          onChangeValorMaximo={this.onChangeValorMaximo}
-          onChangeBuscaNome={this.onChangeBuscaNome}
+            valorMinimo={this.state.valorMinimo}
+            valorMaximo={this.state.valorMaximo}
+            buscaNome={this.state.buscaNome}
+            onChangeValorMinimo={this.onChangeValorMinimo}
+            onChangeValorMaximo={this.onChangeValorMaximo}
+            onChangeBuscaNome={this.onChangeBuscaNome}
           />
 
           <Satelites
-          satelites={satelites}
-          valorMinimo={this.state.valorMinimo}
-          valorMaximo={this.state.valorMaximo}
-          buscaNome={this.state.buscaNome}
+            satelites={satelites}
+            valorMinimo={this.state.valorMinimo}
+            valorMaximo={this.state.valorMaximo}
+            buscaNome={this.state.buscaNome}
+            adicionarAoCarrinho = {this.adicionarAoCarrinho}
           />
 
-          <Carrinho/>
+          <Carrinho
+            satelitesCarrinho={this.state.satelitesCarrinho} 
+            removerDoCarrinho={this.removerDoCarrinho}
+          />
 
         </Main>
   
