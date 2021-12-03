@@ -42,7 +42,10 @@ export class SateliteCard extends React.Component {
       <SateliteInfo>
         <p>{satelite.nome}</p>
         <p>R${satelite.preco},00</p>
-        <Adicionar>
+
+        {/* pegando ID do produto no onClick */}
+        
+        <Adicionar onClick={() => this.props.adicionarAoCarrinho(satelite.id)}>
           Adicionar ao carrinho
         </Adicionar>
       </SateliteInfo>

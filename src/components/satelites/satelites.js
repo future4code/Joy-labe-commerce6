@@ -7,6 +7,7 @@ const Ordem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+ 
   select {
     color: grey;
     border-radius: 20px;
@@ -16,7 +17,7 @@ const Ordem = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
   padding: 16px;
 `
 
@@ -80,6 +81,7 @@ export class Satelites extends React.Component {
         {listaFiltrada.map((satelite) => {
           return <SateliteCard
             satelite={satelite}
+            adicionarAoCarrinho={this.props.adicionarAoCarrinho}
           />
         })}
       </Grid>
